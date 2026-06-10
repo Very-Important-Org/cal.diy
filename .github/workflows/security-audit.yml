@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: cracicorp/setup@v1
         with:
-          size: "2"
+          size: "4"
           image: "default"
       - uses: actions/checkout@v4
         with:
