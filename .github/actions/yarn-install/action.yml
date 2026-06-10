@@ -27,6 +27,12 @@ runs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ inputs.node_version }}
+    # GitHub-hosted images preinstall yarn; CRACI runners do not. Corepack
+    # ships with Node and provides the yarn shim, which then delegates to the
+    # release committed at .yarn/releases via yarnPath.
+    - name: Enable yarn via Corepack
+      shell: bash
+      run: command -v yarn >/dev/null 2>&1 || corepack enable
     - name: Expose yarn config as "$GITHUB_OUTPUT"
       id: yarn-config
       shell: bash
